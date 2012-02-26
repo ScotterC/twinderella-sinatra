@@ -3,7 +3,6 @@ require 'bundler/setup'
 require 'sinatra/base'
 require 'omniauth-facebook'
 require 'tweetstream'
-require 'ruby-debug'
 require File.expand_path('../database', __FILE__)
 require File.join(File.dirname(__FILE__), 'tweet_store')
 #require File.join(File.dirname(__FILE__), 'tweet_filter')
