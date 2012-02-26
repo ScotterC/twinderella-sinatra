@@ -64,21 +64,21 @@ class App < Sinatra::Base
   	omniauth = request.env['omniauth.auth']
 
     # create posterous page (only if one doesn't already exist)
-    unless User.find_by_uid(omniauth[:uid])
-      user = FbGraph::User.me(omniauth[:credentials][:token])
-      user = user.fetch
+    # unless User.find_by_uid(omniauth[:uid])
+    #   user = FbGraph::User.me(omniauth[:credentials][:token])
+    #   user = user.fetch
 
-      parametres = {
-                      'site[hostname]' => "#{user.last_name}-twinderella",
-                      'site[name]' => "#{user.first_name}'s' Twinderella",
-                      'site[is_private]' => 0,
-                      'site[is_group]' => 0,
-                      'site[time_zone]' => hostname,
-                      'site[subhead]' => "For when #{} are the Belle of the Ball",
-                    }
+    #   parametres = {
+    #                   'site[hostname]' => "#{user.last_name}-twinderella",
+    #                   'site[name]' => "#{user.first_name}'s' Twinderella",
+    #                   'site[is_private]' => 0,
+    #                   'site[is_group]' => 0,
+    #                   'site[time_zone]' => hostname,
+    #                   'site[subhead]' => "For when #{} are the Belle of the Ball",
+    #                 }
 
-      Nestful.post "http://posterous.com/api/2/sites", :format => :json, :params => parametres
-    end
+    #   Nestful.post "http://posterous.com/api/2/sites", :format => :json, :params => parametres
+    # end
 
   	User.create!(:uid => omniauth[:uid], :nickname => omniauth[:info][:nickname], :token => omniauth[:credentials][:token], :email => omniauth[:info][:email])
 
