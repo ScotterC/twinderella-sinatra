@@ -1,8 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Handlee);
 body {
-	margin-top:25px;
+	margin-top:30px;
 	background-color:#8ec0e3;*/
-/*	cursor: url("../img/cursor.png"), auto;*/
+	cursor: url("../img/cursor.png"), auto;
 }
 #full-screen-background-image {
   z-index: -999;
@@ -26,6 +26,11 @@ body {
 	text-align:center;
 	padding-top:25px;
 }
+#facebook a:hover {
+	   -moz-box-shadow:    inset 0 4 10px #FFFFFF;
+	   -webkit-box-shadow: inset 0 4 10px #FFFFFF;
+	   box-shadow:         inset 0 4 10px #FFFFFF;
+}
 footer {
 	position:fixed;
 	bottom:2px;
@@ -47,15 +52,15 @@ footer ul li {
 	padding: 0px;
 }
 #twitter {
-	padding: 0px;
+	padding-top: 5px;
 	font-size:30px;
 }
 #posterous {
-	padding: 0px;
+	padding-top: 5px;
 	font-size:30px;
 }
 footer ul li a img {
-	vertical-align:middle;
+	vertical-align:bottom;
 }
 h1 {
 	font-family: 'Handlee', cursive;
@@ -193,7 +198,7 @@ h1 {
 	   will be activated on hover special selector
 	*/
 	ul.thumb li:hover{
-		-webkit-transition: all 3s ease-in-out;
+		-webkit-transition: all 2s ease-in-out;
 	    z-index: 10;
 	    /* original image size */
 	    width: 400px;
