@@ -5,6 +5,7 @@ require 'omniauth-facebook'
 require 'tweetstream'
 require 'fb_graph'
 require 'tzinfo'
+require 'nestful'
 require File.expand_path('../database', __FILE__)
 require File.join(File.dirname(__FILE__), 'tweet_store')
 #require File.join(File.dirname(__FILE__), 'tweet_filter')
