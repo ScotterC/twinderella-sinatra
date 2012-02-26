@@ -1,0 +1,87 @@
+@import url(http://fonts.googleapis.com/css?family=Handlee);
+body {
+	margin-top:25px;
+	/*background-color:#8ec0e3;*/
+/*	cursor: url("../img/cursor.png"), auto;*/
+}
+#full-screen-background-image {
+  z-index: -999;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+#logo {
+	text-align:center;
+}
+#subhead {
+	text-align:center;
+}
+#facebook {
+	text-align:center;
+	padding-top:20px;
+}
+footer {
+	position:fixed;
+	bottom:2px;
+	z-index:1000;
+}
+footer ul {
+	list-style-: none;	
+	font-family: 'Handlee', cursive;
+	font-size:20px;
+	text-align:center;
+}
+footer ul li {
+	display: inline;
+}
+#artsicle {
+	padding: 0px;
+}
+#face {
+	padding: 0px;
+}
+#twitter {
+	padding: 0px;
+	font-size:30px;
+}
+#posterous {
+	padding: 0px;
+	font-size:30px;
+}
+footer ul li a img {
+	vertical-align:middle;
+}
+
+
+* {
+       margin: 0px;
+       padding: 0px;
+     }
+     div#shell {
+       display: block;
+       position: relative;
+       margin: 0px auto;
+       width: 400px;
+       height: 400px;
+     }
+     div#shell{
+       z-index: 1;
+     }
+     img#cinderella {
+       position: absolute;
+       z-index: 2;
+       top: -70px;
+	   bottom: 0px;
+       left: 300px;
+     }
+	img#birdie {
+		position: absolute;
+		z-index: 2;
+		top: -80px;
+		bottom: 0px;
+		left: 525px;
+	}

@@ -26,7 +26,8 @@ class App < Sinatra::Base
     #       in a real app. the redirect is just here to setup the root 
     #       path in this example sinatra app.
     #redirect '/auth/facebook'
-    erb "<a href='/auth/facebook'>Sign in with Facebook</a>"
+    erb :index
+    #erb "<a href='/auth/facebook'>Sign in with Facebook</a>"
   end
 
   get '/tweets' do
