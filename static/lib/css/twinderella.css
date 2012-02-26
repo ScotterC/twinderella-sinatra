@@ -29,6 +29,7 @@ body {
 }
 #facebook a:hover {
 	  background-image: url('img/facebook2.png');
+    cursor: url("../img/cursor.png"), auto;
 }
 footer {
 	position:fixed;
