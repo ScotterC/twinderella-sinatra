@@ -12,7 +12,7 @@ require 'ruby-debug'
 #   require File.expand_path(Dir::pwd + '/tweet_store', __FILE__)
 # else
   require File.expand_path(ENV['APP_ROOT']+'/tweet_store', __FILE__)
-# end
+#end
 
 
 class TweetStream::Daemon
