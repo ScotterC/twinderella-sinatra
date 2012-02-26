@@ -19,6 +19,7 @@ gem 'pg'
 gem 'fb_graph'
 gem 'nestful'
 
-
-gem 'ruby-debug-base19'
-gem "ruby-debug19"
+group :development do
+	gem 'ruby-debug-base19'
+	gem "ruby-debug19"
+end
