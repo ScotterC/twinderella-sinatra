@@ -1,8 +1,9 @@
+require 'rubygems'
 require 'tweetstream'
 require 'json'
 require 'redis'
 require 'geokit'
-require File.join(File.dirname(__FILE__), 'tweet_store')
+require File.expand_path('../../tweet_store', __FILE__)
 
 TweetStream.configure do |config|
   config.consumer_key = 'lDfxmkGkdIZrlMqxciCJ6A'
