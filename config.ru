@@ -8,8 +8,10 @@ if ENV['RACK_ENV'] == 'development'
 		end
 else
 	use OmniAuth::Builder do
-	  provider :facebook, '179805312129831', '5c1dcb88994d19b2bb1ea581fe518da9', :scope => SCOPE
+	  provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], :scope => SCOPE
 	end
 end
+
+
 
 run App.new

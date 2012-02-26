@@ -72,9 +72,9 @@ class App < Sinatra::Base
 
   get '/auth/:provider/callback' do
      auth_params = {
-      'username'  => 'scott@artsicle.com',
-      'password'  => '4braves',
-      'api_token' => 'vsbpJJGisCGibogmzJCEAdcobHtIpGua'
+      'username'  => ENV['POSTEROUS_EMAIL'],
+      'password'  => ENV['POSTEROUS_PASSWORD'],
+      'api_token' => ENV['POSTEROUS_API_TOKEN']
     }
 
   	omniauth = request.env['omniauth.auth']
@@ -155,8 +155,8 @@ class App < Sinatra::Base
 
   	User.create!(:uid => omniauth[:uid], :nickname => omniauth[:info][:nickname], :token => omniauth[:credentials][:token], :email => omniauth[:info][:email])
 
-    api_key = "9c62b0d2526dee43a19e9a2e3c246dca"
-    api_secret = "ac8af199056669266585dd34ee7680be"
+    api_key = ENV['FACE_KEY']
+    api_secret = ENV['FACE_TOKEN']
 
     uids = "#{omniauth[:uid]}@facebook.com"
     namespace = "facebook.com"

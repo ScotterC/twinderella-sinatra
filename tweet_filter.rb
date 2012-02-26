@@ -23,10 +23,10 @@ end
 
 
   TweetStream.configure do |config|
-    config.consumer_key = 'lDfxmkGkdIZrlMqxciCJ6A'
-    config.consumer_secret = 'u84I8ZGY9bjZl2GoG6BwLSV78oj7YtFLzr5ZMkgbfG8'
-    config.oauth_token = '90048571-JSrGz2lVHuKpqDLV6FFKI0dT51TNwsQfUs3nOtUGy'
-    config.oauth_token_secret = 'Kzp1P40Sa7X0aUADDKQThPUapghR2JfMb5iZc6j8qNY'
+    config.consumer_key = ENV['TWITTER_KEY']
+    config.consumer_secret = ENV['TWITTER_SECRET']
+    config.oauth_token = ENV['TWITTER_OAUTH_TOKEN']
+    config.oauth_token_secret = ENV['TWITTER_OAUTH_SECRET']
     config.auth_method = :oauth
     config.parser   = :yajl
   end
