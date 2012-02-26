@@ -6,7 +6,13 @@ require 'json'
 require 'redis'
 require 'geokit'
 require 'nestful'
-require File.expand_path(ENV['APP_ROOT']+'/tweet_store', __FILE__)
+require 'ruby-debug'
+
+if ENV['RACK_ENV'] == 'development'
+  require File.expand_path(Dir::pwd + '/tweet_store', __FILE__)
+else
+  require File.expand_path(ENV['APP_ROOT']+'/tweet_store', __FILE__)
+end
 
 
 class TweetStream::Daemon
@@ -20,8 +26,6 @@ class TweetStream::Daemon
     end
   end
 end
-
-
 
   TweetStream.configure do |config|
     config.consumer_key = ENV['TWITTER_KEY']
