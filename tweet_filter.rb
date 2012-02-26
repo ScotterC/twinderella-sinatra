@@ -5,6 +5,7 @@ require 'tweetstream'
 require 'json'
 require 'redis'
 require 'geokit'
+require 'nestful'
 require File.expand_path(ENV['APP_ROOT']+'/tweet_store', __FILE__)
 
 
@@ -71,6 +72,13 @@ end
           'received_at' => Time.new.to_i
 
         }.to_json)
+
+        tweet_url = status.entities.media.first['url']
+        photo_url = status.entities.media.first['media_url']
+        tweet_id = status[:id]
+        tweet_text = status.text
+        received_at = Time.new.to_i
+        Nestful.post 'ec2-107-21-183-203.compute-1.amazonaws.com:3000/', :format => :json, :params => {:photo => photo_url, :tweet => tweet_url, :tweet_t => tweet_text, :time_received => received_at} 
       end
     end
   end
