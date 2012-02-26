@@ -18,3 +18,7 @@ gem 'geokit'
 gem 'pg'
 gem 'fb_graph'
 gem 'nestful'
+
+
+gem 'ruby-debug-base19'
+gem "ruby-debug19"
