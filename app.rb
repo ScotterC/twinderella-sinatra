@@ -9,7 +9,8 @@ require 'nestful'
 require 'json'
 require 'net/http'
 require 'uri'
-require 'ruby-debug'
+
+require 'ruby-debug' if ENV['RACK_ENV'] == 'development'
 
 require File.expand_path('../database', __FILE__)
 require File.join(File.dirname(__FILE__), 'tweet_store')
