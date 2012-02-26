@@ -107,6 +107,8 @@ class App < Sinatra::Base
       req.set_form_data(parametres)
       response = http.request(req)
 
+      sleep 1
+      
       # Access the response body (JSON)
       site_id = JSON.parse(response.body)["id"] 
 
