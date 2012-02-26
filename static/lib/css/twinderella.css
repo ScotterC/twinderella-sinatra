@@ -24,12 +24,11 @@ body {
 #facebook {
 	text-align:center;
 	padding-top:25px;
+	background-image: url('img/facebook.png');
 	cursor: url("../img/cursor.png"), auto;
 }
 #facebook a:hover {
-	   -moz-box-shadow:    inset 0 4 10px #FFFFFF;
-	   -webkit-box-shadow: inset 0 4 10px #FFFFFF;
-	   box-shadow:         inset 0 4 10px #FFFFFF;
+	  background-image: url('img/facebook2.png');
 }
 footer {
 	position:fixed;
@@ -71,8 +70,9 @@ h1 {
 }
 h2 {
 	font-family: 'Handlee', cursive;
-	font-size:30px;
+	font-size:25px;
 	text-align:center;
+	padding-top:5px;
 }
 
  div#shell {
