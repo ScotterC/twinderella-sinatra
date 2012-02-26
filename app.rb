@@ -3,6 +3,8 @@ require 'bundler/setup'
 require 'sinatra/base'
 require 'omniauth-facebook'
 require 'tweetstream'
+require 'fb_graph'
+require 'tzinfo'
 require File.expand_path('../database', __FILE__)
 require File.join(File.dirname(__FILE__), 'tweet_store')
 #require File.join(File.dirname(__FILE__), 'tweet_filter')
@@ -59,8 +61,38 @@ class App < Sinatra::Base
 
   get '/auth/:provider/callback' do
   	omniauth = request.env['omniauth.auth']
+
+    # create posterous page (only if one doesn't already exist)
+    unless User.find_by_uid(omniauth[:uid])
+      user = FbGraph::User.me(omniauth[:credentials][:token])
+      user = user.fetch
+
+      parametres = {
+                      'site[hostname]' => "#{user.last_name}-twinderella",
+                      'site[name]' => "#{user.first_name}'s' Twinderella",
+                      'site[is_private]' => 0,
+                      'site[is_group]' => 0,
+                      'site[time_zone]' => hostname,
+                      'site[subhead]' => "For when #{} are the Belle of the Ball",
+                    }
+
+      Nestful.post "http://posterous.com/api/2/sites", :format => :json, :params => parametres
+    end
+
   	User.create!(:uid => omniauth[:uid], :nickname => omniauth[:info][:nickname], :token => omniauth[:credentials][:token], :email => omniauth[:info][:email])
-  	
+
+    api_key = "9c62b0d2526dee43a19e9a2e3c246dca"
+    api_secret = "ac8af199056669266585dd34ee7680be"
+
+    uids = "#{omniauth[:uid]}@facebook.com"
+    namespace = "facebook.com"
+
+    #callback = "AWS ip"
+
+    # Face.com train call with user info
+    Nestful.post "https://api.face.com/faces/train.json?api_key=#{api_key}&api_secret=#{api_secret}&uids=#{uids}&namespace=#{namespace}&user_auth=fb_user:#{omniauth[:uid]},fb_oauth_token:#{omniauth[:credentials][:token]}&", :format => :form
+
+
   	redirect '/success'
   end
 
