@@ -27,8 +27,6 @@ end
 
 REDIS_KEY = 'tweets'
 
-@statuses = []
-
 CURRENT_POSITION = "40.735726, -73.99507"
 #TweetStream::Client.new
 #TweetStream::Daemon.new('tracker')
@@ -55,9 +53,6 @@ end.track('photo') do |status, client|
         'received_at' => Time.new.to_i
 
       }.to_json)
-
-      @statuses << status
-      client.stop if @statuses.size >= 10
     end
   end
 end
