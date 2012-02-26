@@ -3,7 +3,7 @@ require 'sinatra/activerecord'
 
 # Establish the database connection; or, omit this and use the DATABASE_URL
 # environment variable or the default sqlite://<environment>.db as the connection string:
-set :database, 'sqlite://twinderella.db'
+set :database,  (ENV["DATABASE_URL"] || "sqlite3:///#{Dir.pwd}/development.sqlite3")
 
 # # At this point, you can access the ActiveRecord::Base class using the
 # # "database" object:
