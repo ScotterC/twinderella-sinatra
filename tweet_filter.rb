@@ -55,7 +55,7 @@ end
   #TweetStream::Client
   TweetStream::Daemon.new(ENV['TWITTER_USERNAME'], ENV['TWITTER_PASSWORD']).on_error do |message|
     puts message
-  end.track('twinderella') do |status, client|
+  end.track('phd2', 'twinderella', 'pic.twitter', 'photo') do |status, client|
     if status.key?(:entities) && status.entities.key?(:media) && status.entities.media.first["type"] == "photo" #&& status.key?(:geo) && status.geo != nil && status.geo.key?(:coordinates)
       # c = status.geo.coordinates
       # unless c.length > 1
