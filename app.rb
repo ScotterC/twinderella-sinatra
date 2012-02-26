@@ -172,7 +172,6 @@ class App < Sinatra::Base
   end
 
   get '/success' do
-<<<<<<< HEAD
     begin
       user = User.find_by_uid(params[:uid])
       user = FbGraph::User.me(user.token)
@@ -180,14 +179,6 @@ class App < Sinatra::Base
       @facebook_pic = user.picture + '?type=large'
     rescue
     end
-=======
-    debugger
-    user = User.find_by_uid(params[:uid])
-    user = FbGraph::User.me(user.token)
-    user = user.fetch
-    @facebook_pic = user.picture + '?type=large'
->>>>>>> 0b7c289e08ee209a7a3ba0eb1905921a301306de
-
     erb :success
   end
   

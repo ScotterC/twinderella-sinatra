@@ -142,7 +142,6 @@ ul.thumb li {
     */
 /*	    -webkit-transition: all 3s ease-in-out;
 */	    /* to create a better 3D feeling
-<<<<<<< HEAD
 	       z-index will be in a range from 0 to 10
 	       this means while another pic is going
 	       back to its position another rollovered one
@@ -150,81 +149,7 @@ ul.thumb li {
 	    */
 	    z-index: 0;
 	}
-	ul.thumb li img {
-	    width: 100%;
-	    height: 100%;
-	}
-	ul.thumb li:nth-child(1) {
-	    margin-top: -130px;
-	    margin-left: -130px;
-	    -moz-transform: rotate(30deg);
-	    -webkit-transform: rotate(30deg);
-	    transform: rotate(30deg);
-	    -webkit-filter: blur(5px);
-	}
-	ul.thumb li:nth-child(2) {
-	    margin-top: -120px;
-	    margin-left: -10px;
-	    -moz-transform: rotate(19deg);
-	    -webkit-transform: rotate(19deg);
-	    transform: rotate(19deg);
-	    -webkit-filter: blur(4px);
-	}
-	ul.thumb li:nth-child(3) {
-	    margin-top: -10px;
-	    margin-left: -180px;
-	    -moz-transform: rotate(-10deg);
-	    -webkit-transform: rotate(-10deg);
-	    transform: rotate(-10deg);
-	    -webkit-filter: blur(3px);
-	}
-	ul.thumb li:nth-child(4) {
-	    margin-top: -50px;
-	    margin-left: -80px;
-	    -moz-transform: rotate(12deg);
-	    -webkit-transform: rotate(12deg);
-	    transform: rotate(12deg);
-	    -webkit-filter: blur(2px);
-	}
-	ul.thumb li:nth-child(5) {
-	    margin-top: 20px;
-	    margin-left: 30px;
-	    -moz-transform: rotate(-20deg);
-	    -webkit-transform: rotate(-20deg);
-	    transform: rotate(-20deg);
-	    -webkit-filter: blur(1px);
-	}
-	/* here is how the LI element should look
-	   at the end of the transition which
-	   will be activated on hover special selector
-	*/
-	ul.thumb li:hover{
-		-webkit-transition: all 2s ease-in-out;
-	    z-index: 10;
-	    /* original image size */
-	    width: 400px;
-	    height: 300px;
-	    /* put the LI in the center (almost due to bottom padding) */
-	    margin-top: -151px;
-	    margin-left: -240px;
-	    /* the effect is a "zoom" one, the shadow will be bigger */
-	    -moz-box-shadow:8px 8px 24px #111;
-		  -webkit-box-shadow:8px 8px 24px #111;
-		  box-shadow:8px 8px 24px #111;
-	    /* and finally order via zero degrees rotation */
-	    -moz-transform: rotate(0deg);
-	    -webkit-transform: rotate(0deg);
-	    -webkit-filter: blur(0px);
-	    transform: rotate(0deg);
-	}
-=======
-       z-index will be in a range from 0 to 10
-       this means while another pic is going
-       back to its position another rollovered one
-       will gradually reach higher z-index
-    */
-    z-index: 0;
-}
+
 ul.thumb li img {
     width: 100%;
     height: 100%;
@@ -292,4 +217,4 @@ ul.thumb li:hover{
     -webkit-filter: blur(0px);
     transform: rotate(0deg);
 }
->>>>>>> 84491f2f0a31db9b35aa4f06f276c8a803464cad
+
