@@ -5,6 +5,10 @@ require 'omniauth-facebook'
 require 'tweetstream'
 require 'fb_graph'
 require 'tzinfo'
+require 'nestful'
+require 'json'
+require 'net/http'
+require 'uri'
 require File.expand_path('../database', __FILE__)
 require File.join(File.dirname(__FILE__), 'tweet_store')
 #require File.join(File.dirname(__FILE__), 'tweet_filter')
@@ -66,17 +70,36 @@ class App < Sinatra::Base
     unless User.find_by_uid(omniauth[:uid])
       user = FbGraph::User.me(omniauth[:credentials][:token])
       user = user.fetch
+      user_gender =  user.gender == "male" ? "he" : "she" if user.gender
 
       parametres = {
                       'site[hostname]' => "#{user.last_name}-twinderella",
                       'site[name]' => "#{user.first_name}'s' Twinderella",
                       'site[is_private]' => 0,
                       'site[is_group]' => 0,
-                      'site[time_zone]' => hostname,
-                      'site[subhead]' => "For when #{} are the Belle of the Ball",
+                      'site[time_zone]' => ActiveSupport::TimeZone.new(user.timezone).name,
+                      'site[subhead]' => "For when #{user_gender} is the Belle of the Ball",
                     }
 
-      Nestful.post "http://posterous.com/api/2/sites", :format => :json, :params => parametres
+      #create initial site
+      #resp = Nestful.post "http://posterous.com/api/2/sites", {:format => :json, :params => parametres}
+
+      uri = URI.parse("http://posterous.com/api/2/sites")
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      req = Net::HTTP::Get.new(uri.request_uri)
+      req.basic_auth("[api_key]", "artsicle")
+      response = http.request(req)
+
+      # Access the response body (JSON)
+      site_id = JSON.parse(response.body)["id"] 
+
+      #site_id = JSON.parse(resp)["id"]
+
+      #style the site
+      profile_pic = user.picture
+      Nestful.put "http://posterous.com/api/2/sites/#{site_id}/profile/image", {:format => :json, :params => { "file" => profile_pic } } 
+
     end
 
   	User.create!(:uid => omniauth[:uid], :nickname => omniauth[:info][:nickname], :token => omniauth[:credentials][:token], :email => omniauth[:info][:email])
