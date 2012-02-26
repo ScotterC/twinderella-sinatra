@@ -6,7 +6,13 @@ require 'json'
 require 'redis'
 require 'geokit'
 require 'nestful'
-require File.expand_path(ENV['APP_ROOT']+'/tweet_store', __FILE__)
+require 'ruby-debug'
+
+# if ENV['RACK_ENV'] == 'development'
+#   require File.expand_path(Dir::pwd + '/tweet_store', __FILE__)
+# else
+  require File.expand_path(ENV['APP_ROOT']+'/tweet_store', __FILE__)
+# end
 
 
 class TweetStream::Daemon
@@ -20,8 +26,6 @@ class TweetStream::Daemon
     end
   end
 end
-
-
 
   TweetStream.configure do |config|
     config.consumer_key = ENV['TWITTER_KEY']
@@ -51,14 +55,14 @@ end
   #TweetStream::Client
   TweetStream::Daemon.new(ENV['TWITTER_USERNAME'], ENV['TWITTER_PASSWORD']).on_error do |message|
     puts message
-  end.track('photo') do |status, client|
-    if status.key?(:entities) && status.entities.key?(:media) && status.entities.media.first["type"] == "photo" && status.key?(:geo) && status.geo != nil && status.geo.key?(:coordinates)
-      c = status.geo.coordinates
-      unless c.length > 1
-        c = c.join(', ')
-      end
+  end.track('twinderella') do |status, client|
+    if status.key?(:entities) && status.entities.key?(:media) && status.entities.media.first["type"] == "photo" #&& status.key?(:geo) && status.geo != nil && status.geo.key?(:coordinates)
+      # c = status.geo.coordinates
+      # unless c.length > 1
+      #   c = c.join(', ')
+      # end
 
-      if Geokit::LatLng.distance_between(CURRENT_POSITION, c).to_i < 500
+      #if Geokit::LatLng.distance_between(CURRENT_POSITION, c).to_i < 500
         redis.lpush(REDIS_KEY, {
 
           'id' => status[:id],
@@ -78,7 +82,7 @@ end
         tweet_id = status[:id]
         tweet_text = status.text
         received_at = Time.new.to_i
-        Nestful.post 'ec2-107-21-183-203.compute-1.amazonaws.com:3000/', :format => :json, :params => {:photo => photo_url, :tweet => tweet_url, :tweet_t => tweet_text, :time_received => received_at} 
-      end
+        Nestful.post '107.20.208.47:3000/', :format => :json, :params => {:photo => photo_url, :tweet => tweet_url, :tweet_t => tweet_text, :time_received => received_at} 
+      #end
     end
   end
