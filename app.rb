@@ -107,8 +107,6 @@ class App < Sinatra::Base
       req.set_form_data(parametres)
       response = http.request(req)
 
-      debugger 
-
       # Access the response body (JSON)
       site_id = JSON.parse(response.body)["id"] 
 
@@ -156,7 +154,7 @@ class App < Sinatra::Base
     end
 
 
-  	User.find_or_create!(:uid => omniauth[:uid], :token => omniauth[:credentials][:token])
+  	User.find_or_create_by_uid_and_token(omniauth[:uid], omniauth[:credentials][:token])
 
     api_key = ENV['FACE_KEY']
     api_secret = ENV['FACE_TOKEN']
