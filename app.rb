@@ -9,6 +9,7 @@ require 'nestful'
 require 'json'
 require 'net/http'
 require 'uri'
+
 require File.expand_path('../database', __FILE__)
 require File.join(File.dirname(__FILE__), 'tweet_store')
 #require File.join(File.dirname(__FILE__), 'tweet_filter')
@@ -29,7 +30,8 @@ class App < Sinatra::Base
     #       in a real app. the redirect is just here to setup the root 
     #       path in this example sinatra app.
     #redirect '/auth/facebook'
-    erb "<a href='/auth/facebook'>Sign in with Facebook</a>"
+    erb :index
+    #erb "<a href='/auth/facebook'>Sign in with Facebook</a>"
   end
 
   get '/tweets' do
@@ -67,6 +69,7 @@ class App < Sinatra::Base
   	omniauth = request.env['omniauth.auth']
 
     # create posterous page (only if one doesn't already exist)
+
     unless User.find_by_uid(omniauth[:uid])
       user = FbGraph::User.me(omniauth[:credentials][:token])
       user = user.fetch
