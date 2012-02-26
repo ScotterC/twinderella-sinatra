@@ -174,6 +174,8 @@ class App < Sinatra::Base
     if user && user.token
       user = FbGraph::User.me(user.token)
       user = user.fetch
+      last_name = user.last_name.downcase
+      @posterous_url = "http://#{last_name}-twinderella.posterous.com"
       @facebook_pic = user.picture + '?type=large'
     end
     erb :success
