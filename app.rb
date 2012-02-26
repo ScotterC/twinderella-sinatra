@@ -153,7 +153,6 @@ class App < Sinatra::Base
 
     end
 
-
   	User.find_or_create_by_uid_and_token(omniauth[:uid], omniauth[:credentials][:token])
 
     api_key = ENV['FACE_KEY']
