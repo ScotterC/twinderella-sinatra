@@ -24,16 +24,14 @@ body {
 #facebook {
 	text-align:center;
 	padding-top:25px;
-	background-image: url('img/facebook.png');
 	cursor: url("../img/cursor.png"), auto;
 }
 #facebook a:hover {
-	  background-image: url('img/facebook2.png');
     cursor: url("../img/cursor.png"), auto;
 }
 footer {
 	position:fixed;
-	bottom:2px;
+	bottom:8px;
 	z-index:1000;
 }
 footer ul {
