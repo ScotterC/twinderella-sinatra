@@ -7,7 +7,7 @@ require File.expand_path('../app', __FILE__)
 use Rack::Session::Cookie
 
 use OmniAuth::Builder do
-  provider :facebook, '265707230172470', '7c3134b537fd40eb5ed5081df7dae700', :scope => SCOPE
+  provider :facebook, '179805312129831', '5c1dcb88994d19b2bb1ea581fe518da9', :scope => SCOPE
 end
 
 run App.new
