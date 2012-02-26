@@ -6,7 +6,6 @@ require 'json'
 require 'redis'
 require 'geokit'
 require 'nestful'
-require 'ruby-debug'
 
 # if ENV['RACK_ENV'] == 'development'
 #   require File.expand_path(Dir::pwd + '/tweet_store', __FILE__)
