@@ -53,7 +53,7 @@ class App < Sinatra::Base
     # solution (but requires more jQuery code).
     @tweets = STORE.tweets
     @tweet_class = 'latest'  # So we can hide and animate
-    erb :latest#, :layout => false
+    erb :latest, :layout => false
   end
 
   # client-side flow
