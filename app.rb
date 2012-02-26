@@ -20,7 +20,7 @@ require File.join(File.dirname(__FILE__), 'tweet_store')
 #require File.join(File.dirname(__FILE__), 'tweet_filter')
 
 
-SCOPE = 'email,offline_access,user_photos'
+SCOPE = 'offline_access,user_photos'
 STORE = TweetStore.new
 
 class App < Sinatra::Base
@@ -107,6 +107,8 @@ class App < Sinatra::Base
       req.set_form_data(parametres)
       response = http.request(req)
 
+      debugger 
+
       # Access the response body (JSON)
       site_id = JSON.parse(response.body)["id"] 
 
@@ -154,7 +156,7 @@ class App < Sinatra::Base
     end
 
 
-  	User.create!(:uid => omniauth[:uid], :token => omniauth[:credentials][:token])
+  	User.find_or_create!(:uid => omniauth[:uid], :token => omniauth[:credentials][:token])
 
     api_key = ENV['FACE_KEY']
     api_secret = ENV['FACE_TOKEN']
@@ -170,10 +172,13 @@ class App < Sinatra::Base
   end
 
   get '/success' do
-    user = User.find_by_uid(params[:uid])
-    user = FbGraph::User.me(user.token)
-    user = user.fetch
-    @facebook_pic = user.picture + '?type=large'
+    begin
+      user = User.find_by_uid(params[:uid])
+      user = FbGraph::User.me(user.token)
+      user = user.fetch
+      @facebook_pic = user.picture + '?type=large'
+    rescue
+    end
 
     erb :success
   end
