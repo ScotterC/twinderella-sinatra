@@ -20,7 +20,7 @@ class TweetStore
   
   # Retrieves the specified number of tweets, but only if they are more recent
   # than the specified timestamp.
-  def tweets(limit=100)
+  def tweets(limit=15)
     @db.lrange(REDIS_KEY, 0, limit).collect {|t|
       Tweet.new(JSON.parse(t))
     }#.reject {|t| t.received_at <= since}  # In 1.8.7, should use drop_while instead
