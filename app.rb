@@ -169,6 +169,7 @@ class App < Sinatra::Base
   end
 
   get '/success' do
+    debugger
     user = User.find_by_uid(params[:uid])
     user = FbGraph::User.me(user.token)
     user = user.fetch
