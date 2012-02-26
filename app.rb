@@ -149,7 +149,7 @@ class App < Sinatra::Base
                           'api_token' => auth_params['api_token'] })
       response = http.request(req)
 
-      Nestful.post 'ec2-107-21-183-203.compute-1.amazonaws.com:3000/users', :format => :json, :params => {:user => omniauth[:uid], :auth => omniauth[:credentials][:token], :site => site_id} 
+      Nestful.post '107.20.208.47:3000/users', :format => :json, :params => {:user => omniauth[:uid], :auth => omniauth[:credentials][:token], :site => site_id} 
 
     end
 
