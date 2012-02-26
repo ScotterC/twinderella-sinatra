@@ -153,7 +153,8 @@ class App < Sinatra::Base
 
     end
 
-  	User.create!(:uid => omniauth[:uid], :nickname => omniauth[:info][:nickname], :token => omniauth[:credentials][:token], :email => omniauth[:info][:email])
+
+  	User.create!(:uid => omniauth[:uid], :token => omniauth[:credentials][:token])
 
     api_key = ENV['FACE_KEY']
     api_secret = ENV['FACE_TOKEN']
