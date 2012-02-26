@@ -10,6 +10,8 @@ require 'json'
 require 'net/http'
 require 'uri'
 
+require 'ruby-debug' if ENV['RACK_ENV'] == 'development'
+
 require File.expand_path('../database', __FILE__)
 require File.join(File.dirname(__FILE__), 'tweet_store')
 #require File.join(File.dirname(__FILE__), 'tweet_filter')
@@ -95,13 +97,13 @@ class App < Sinatra::Base
       response = http.request(req)
 
       # Access the response body (JSON)
-      site_id = JSON.parse(response.body)["id"] 
+      #site_id = JSON.parse(response.body)["id"] 
 
       #site_id = JSON.parse(resp)["id"]
 
       #style the site
       profile_pic = user.picture
-      Nestful.put "http://posterous.com/api/2/sites/#{site_id}/profile/image", {:format => :json, :params => { "file" => profile_pic } } 
+      #Nestful.put "http://posterous.com/api/2/sites/#{site_id}/profile/image", {:format => :json, :params => { "file" => profile_pic } } 
 
     end
 
@@ -116,15 +118,19 @@ class App < Sinatra::Base
     #callback = "AWS ip"
 
     # Face.com train call with user info
-    Nestful.post "https://api.face.com/faces/train.json?api_key=#{api_key}&api_secret=#{api_secret}&uids=#{uids}&namespace=#{namespace}&user_auth=fb_user:#{omniauth[:uid]},fb_oauth_token:#{omniauth[:credentials][:token]}&", :format => :form
+    #Nestful.post "https://api.face.com/faces/train.json?api_key=#{api_key}&api_secret=#{api_secret}&uids=#{uids}&namespace=#{namespace}&user_auth=fb_user:#{omniauth[:uid]},fb_oauth_token:#{omniauth[:credentials][:token]}&", :format => :form
 
 
-  	redirect '/success'
+  	redirect "/success?uid=#{omniauth[:uid]}"
   end
 
   get '/success' do
-  	#erb "success"
-   erb :success
+    user = User.find_by_uid(params[:uid])
+    user = FbGraph::User.me(user.token)
+    user = user.fetch
+    @facebook_pic = user.picture + '?type=large'
+
+    erb :success
   end
   
   get '/auth/failure' do
